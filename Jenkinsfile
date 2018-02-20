@@ -6,5 +6,10 @@ pipeline {
         sh 'echo \'kompilacja\''
       }
     }
+    stage('test') {
+      steps {
+        echo 'test'
+      }
+    }
   }
 }
