@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('kompilacja') {
       steps {
-        sh 'echo \'kompilacja\''
+        echo 'kompilacja'
       }
     }
     stage('test') {
