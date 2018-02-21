@@ -1,50 +1,35 @@
-pipeline {
-  agent any
-  stages {
-  
-	  if(env.BRANCH_NAME == 'master'){
-		 stage("Build"){
-				steps {
-					echo 'Build'
-				}
-			}
-		 stage("Deploy"){
-				steps {
-					echo 'Deploy'
-				}
-			}
-	   }
-	   
-	   if(env.BRANCH_NAME == 'bugfix'){
-			stage("Unit Test"){
-				steps {
-					echo 'Unit Test'
-				}
-			}
-			stage("Integraton Test"){
-				steps {
-					echo 'Integraton Test'
-				}
-			}
-			stage("Smoke Test"){
-				steps {
-					echo 'Smoke Test'
-				}
-			}
-		}
-		
-		if(env.BRANCH_NAME == 'feature'){
-			stage("Unit Test"){
-				steps {
-					echo 'Unit Test'
-				}
-			}
-			stage("Smoke Test"){
-				steps {
-					echo 'Smoke Test'
-				}
-			}
-		}
- 
+    pipeline {
+            agent any
+
+            stages {
+                    stage('test') {
+                            steps {
+                                    sh 'echo hello'
+                            }
+                    }
+                    stage('test1') {
+                            steps {
+                                    sh 'echo $TEST'
+                            }
+                    }
+                    stage('test3') {
+                            steps {
+                                    script {
+                                            if (env.BRANCH_NAME == 'master') {
+                                                    echo 'Build'
+													echo 'Deploy'
+                                            }
+											if (env.BRANCH_NAME == 'bugfix') {
+                                                    echo 'Unit Test'
+													echo 'Smoke Test'
+                                            }
+											if (env.BRANCH_NAME == 'feature') {
+                                                    echo 'Unit Test'
+													echo 'Integraton Test'
+													echo 'Smoke Test'
+                                            }
+                                    }
+                            }
+                    }
+            }
     }
-}
